@@ -26,15 +26,11 @@ namespace Course {
                 Console.Write("Check-out date (dd/MM/yyyy): ");
                 checkOut = DateTime.Parse(Console.ReadLine());
 
-                DateTime now = DateTime.Now;
-                if (checkIn < now || checkOut < now) {
-                    Console.WriteLine("Error in reservation: Reservation dates for update must be future dates");
-                }
-                else if (checkOut <= checkIn) {
-                    Console.WriteLine("Error in reservation: Check-out date must be after check-in date");
+                String error = reservation.UpdateDates(checkIn, checkOut);
+                if (error != null) {
+                    Console.WriteLine("Error in reservation: " + error);
                 }
                 else {
-                    reservation.UpdateDates(checkIn, checkOut);
                     Console.WriteLine("Reservation: " + reservation);
                 }
             }
